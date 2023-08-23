@@ -14,19 +14,23 @@ def create_app():
     @app.route('/upload_by_url', methods = ['GET', 'POST'])
     def save_file():
         if request.method == 'POST':
-            f = request.files['file']
-            filename = secure_filename(f.filename)
-            current_GMT = time.gmtime()
+            try:
+                f = request.files['file']
+                filename = secure_filename(f.filename)
+                current_GMT = time.gmtime()
 
-            time_stamp = calendar.timegm(current_GMT)
-            dir = str(time_stamp) + str(uuid.uuid4())+ '-' + str(uuid.uuid4()) + '-' + str(uuid.uuid4())
-            os.mkdir('/app/store/' + dir)
-            
-            url = dir +'/'+  filename
-            f.save('/app/store/' + url, )
+                time_stamp = calendar.timegm(current_GMT)
+                dir = str(time_stamp) + str(uuid.uuid4()) + '-' + str(uuid.uuid4()) + '-' + str(uuid.uuid4())
+                os.mkdir('/app/store/' + dir)
+                
+                url = dir +'/'+  filename
+                f.save('/app/store/' + url, )
 
-            file = open('/app/store/' + url,"rb")
-            content = file.read()
+                file = open('/app/store/' + url,"rb")
+                content = file.read()
+            except Exception as e:
+                print(e, flush=True)
+                return render_template('content.html', content='error')                
             
             
         return render_template('content.html', content='http://save.mock-interview.orby-tech.space/static/' + url) 
