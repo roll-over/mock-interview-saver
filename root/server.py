@@ -15,6 +15,7 @@ def create_app():
     def save_file():
         if request.method == 'POST':
             try:
+                print(request.files, flush=True)
                 f = request.files['file']
                 filename = secure_filename(f.filename)
                 current_GMT = time.gmtime()
