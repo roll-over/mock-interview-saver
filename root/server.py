@@ -29,7 +29,7 @@ def create_app():
             content = file.read()
             
             
-        return render_template('content.html', content='http://localhost:3000/static/' + url) 
+        return render_template('content.html', content='http://save.mock-interview.orby-tech.space/static/' + url) 
 
     @app.route('/static/<dir>/<name>')
     def send_js(dir, name):
