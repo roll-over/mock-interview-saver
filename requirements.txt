@@ -1,0 +1,5 @@
+path==16.3.0
+python-dotenv
+Flask
+flask-cors
+flask_wtf

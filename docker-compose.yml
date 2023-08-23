@@ -1,0 +1,14 @@
+services:
+  mock-interview-saver:
+    build: .
+    container_name: mock-interview-saver
+    command: python /app/start.py
+    restart: always
+    ports:
+      - 3000:5000
+    env_file:
+      - .env
+    volumes:
+      - ./root/:/app/root/
+      - ./start.py:/app/start.py
+      - ./store/:/app/store/
